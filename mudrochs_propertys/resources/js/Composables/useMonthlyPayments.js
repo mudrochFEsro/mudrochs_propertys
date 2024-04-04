@@ -7,6 +7,12 @@ export const useMonthlyPayment = (total, interestRate, duration) => {
     return principle * monthlyInterest * (Math.pow(1 + monthlyInterest, numberOfPaymentMonths)) / (Math.pow(1 + monthlyInterest, numberOfPaymentMonths) - 1)
 })
 
-return { monthlyPayment }
+const totalPayed = computed(() => {
+    return (isRef(duration) ? duration.value : duration) * 12 * monthlyPayment.value
+})
+
+const totalInterest = computed(() => totalPayed.value - (isRef(total) ? total.value : total))
+
+return { monthlyPayment, totalPayed, totalInterest }
 
 }
