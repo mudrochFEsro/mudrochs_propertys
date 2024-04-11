@@ -3,16 +3,19 @@
 namespace App\Http\Controllers;
 
 use App\Models\Listing;
+// use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 class ListingController extends Controller
 {
-
+    
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
+        // dd(Auth::user());
+
         return inertia(
             'Listing/Index',
             [
