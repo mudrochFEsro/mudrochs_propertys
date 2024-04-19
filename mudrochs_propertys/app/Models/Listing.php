@@ -23,7 +23,7 @@ class Listing extends Model
     public function owner(): BelongsTo
     {
         return $this->belongsTo(
-            \app\Models\User::class,
+            \App\Models\User::class,
             'by_user_id'
         );
     }
