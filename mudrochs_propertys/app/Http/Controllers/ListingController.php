@@ -5,15 +5,22 @@ namespace App\Http\Controllers;
 use App\Models\Listing;
 // use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ListingController extends Controller
 {
+    // public function __construct() toto automaticky zavola vsetky funkcie z ListingPolicy.php 
+    // treba vsetko initnut cez return true
+    public function __construct()
+    {
+        $this->authorizeResource(Listing::class, 'listing');
+    }
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        // dd(Auth::user());
 
         return inertia(
             'Listing/Index',
@@ -28,6 +35,7 @@ class ListingController extends Controller
      */
     public function create()
     {
+        // $this->authorize('create');
         return inertia('Listing/Create');
     }
 
@@ -66,6 +74,7 @@ class ListingController extends Controller
      */
     public function show(Listing $listing)
     {
+        // $this->authorize('view', $listing);
         return inertia(
             'Listing/Show',
             [
